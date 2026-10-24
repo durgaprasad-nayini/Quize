@@ -74,7 +74,7 @@ cp client/.env.example client/.env
 cp server/.env.example server/.env
 ```
 
-4. Start MongoDB locally or configure a MongoDB Atlas connection string.
+4. Set `MONGODB_URI` in `server/.env` to your MongoDB Atlas connection string (or a local MongoDB URI).
 
 5. Start both apps in development mode:
 
@@ -124,7 +124,11 @@ CLIENT_URL=http://localhost:5173
 
 1. Create a cluster.
 2. Create a database user.
-3. Copy the connection string to `MONGODB_URI`.
+3. In Atlas Network Access, allow the IP address from which the server will connect.
+4. Copy the cluster connection string into `server/.env` as `MONGODB_URI`; replace the username, password, and cluster host placeholders, and use `quiz_app` as the database name.
+5. Restart the server. It connects through Mongoose before accepting requests and seeds sample quizzes when needed.
+
+Keep the real connection string in `server/.env` only. Do not commit credentials or share the URI.
 
 The application automatically seeds an initial set of quizzes if the database is empty.
 
