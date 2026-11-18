@@ -102,9 +102,11 @@ http://localhost:5000
 VITE_API_URL=http://localhost:5000/api
 ```
 
-For Vercel deployments, set `VITE_API_URL` to the backend origin (for example,
-`https://your-api.onrender.com`) or its `/api` URL. The client adds `/api` when
-it is missing. Redeploy the frontend after changing this build-time variable.
+In production builds, the client uses the same-origin `/api` path. The Vercel
+rewrite in `client/vercel.json` proxies those requests to the Render API so
+authentication cookies work across page reloads. For local development,
+`VITE_API_URL` can be set to the backend origin or its `/api` URL; the client
+adds `/api` when it is missing.
 
 ### Server
 

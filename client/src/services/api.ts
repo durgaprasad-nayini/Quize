@@ -2,9 +2,11 @@ import axios from 'axios';
 import type { Quiz, QuizAttempt, User } from '../types';
 
 const configuredApiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, '');
-const apiBaseUrl = configuredApiUrl
-  ? `${configuredApiUrl}${/\/api$/i.test(configuredApiUrl) ? '' : '/api'}`
-  : 'http://localhost:5000/api';
+const apiBaseUrl = import.meta.env.PROD
+  ? '/api'
+  : configuredApiUrl
+    ? `${configuredApiUrl}${/\/api$/i.test(configuredApiUrl) ? '' : '/api'}`
+    : 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: apiBaseUrl,
